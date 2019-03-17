@@ -1,0 +1,17 @@
+To run this model for 20Newsgroup,rueter,brown call
+python3.6 or python3 or python pipline_Brown.py in the same directory 
+ firest result H1 should edite file by remove " from column and row manualy
+and edite last row value 
+u can edite pathes from utils
+lesk dataset is main curpos for PMI but remove header,index, [] ," and '
+but these files for all curps in the wiki dirictory oon project topic_interpretability-master then start run sh 
+
+
+-To collect text from dataset files like bbc and  ohsumed-all 
+1) decompresed files to folder 
+2) call this function tp.convert_courpsfile_to_csv('/media/fsg/74C86089C8604C04/Futuure-paper/data_source/','ohsumed-all')
+to get csv contains all files in rows
+
+
+======Evaluation======
+

@@ -1,0 +1,800 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{new-york-times-articles}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{wsd} \PY{k}{import} \PY{n}{lesk}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{wordnet} \PY{k}{as} \PY{n}{wn}
+        \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{n}{matplotlib}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{st}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{sent\PYZus{}tokenize}\PY{p}{,} \PY{n}{word\PYZus{}tokenize}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{wsd} \PY{k}{import} \PY{n}{lesk}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{stopwords}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{RegexpTokenizer}
+        \PY{c+c1}{\PYZsh{}from stemming.porter2 import stem}
+        \PY{k+kn}{from} \PY{n+nn}{nltk} \PY{k}{import} \PY{n}{PorterStemmer}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{stem}\PY{n+nn}{.}\PY{n+nn}{porter} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{stem}\PY{n+nn}{.}\PY{n+nn}{snowball} \PY{k}{import} \PY{n}{SnowballStemmer}
+        \PY{k+kn}{from} \PY{n+nn}{string} \PY{k}{import} \PY{n}{digits}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{TfidfVectorizer}\PY{p}{,} \PY{n}{CountVectorizer}
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+        
+        \PY{k+kn}{import} \PY{n+nn}{re}
+        \PY{k+kn}{from} \PY{n+nn}{nltk} \PY{k}{import} \PY{n}{word\PYZus{}tokenize}
+        \PY{k+kn}{import} \PY{n+nn}{string}
+        \PY{k+kn}{import}  \PY{n+nn}{gensim}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{as} \PY{n+nn}{md}
+        \PY{k+kn}{from} \PY{n+nn}{gensim}\PY{n+nn}{.}\PY{n+nn}{models}\PY{n+nn}{.}\PY{n+nn}{phrases} \PY{k}{import} \PY{n}{Phrases}\PY{p}{,} \PY{n}{Phraser}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{path\PYZus{}database}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/fsg/PH/NYT\PYZus{}output/}\PY{l+s+s1}{\PYZsq{}} 
+        
+        \PY{n}{pragraph\PYZus{}index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pragraph\PYZus{}index.csv}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{Sentences}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sentences.csv}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{Sentences\PYZus{}not\PYZus{}stops}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sentences\PYZus{}not\PYZus{}stops.csv}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{Write Excell sheet}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{k}{def} \PY{n+nf}{save\PYZus{}file\PYZus{}to\PYZus{}database}\PY{p}{(}\PY{n}{data\PYZus{}rows}\PY{p}{,}\PY{n}{path\PYZus{}database}\PY{p}{,}\PY{n}{file\PYZus{}databbase}\PY{p}{,}\PY{n}{header\PYZus{}list}\PY{p}{)}\PY{p}{:}\PY{c+c1}{\PYZsh{}header\PYZus{}list=[\PYZsq{}index\PYZsq{},\PYZsq{}text\PYZsq{}]}
+            \PY{n}{outfile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{o}{+}\PY{n}{file\PYZus{}databbase}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{writer}\PY{o}{=}\PY{n}{csv}\PY{o}{.}\PY{n}{writer}\PY{p}{(}\PY{n}{outfile}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}header\PYZus{}list=[\PYZsq{}uuid\PYZsq{},\PYZsq{}paragraph\PYZsq{},\PYZsq{}doc\PYZus{}id\PYZsq{}]}
+            \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data\PYZus{}rows}\PY{p}{:}
+                \PY{n}{row}\PY{o}{=}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{line}\PY{p}{]}\PY{c+c1}{\PYZsh{},\PYZsq{}paragraph no.\PYZsq{}+str(i)]}
+                \PY{k}{if} \PY{n}{i}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                    
+                    \PY{n}{writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{n}{header\PYZus{}list}\PY{p}{)}
+                    \PY{n}{writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{}print(\PYZsq{}ff\PYZsq{})}
+                    \PY{n}{writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+                \PY{n}{i}\PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{c+c1}{\PYZsh{}outfile.close()}
+                    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{read\PYZus{}text\PYZus{}from\PYZus{}database}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{p}{,}\PY{n}{file\PYZus{}databbase}\PY{p}{)}\PY{p}{:}
+            \PY{n}{queue\PYZus{}paragraph}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{}f = open(sys.argv[1], \PYZsq{}rt\PYZsq{})}
+            \PY{n}{outfile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{o}{+}\PY{n}{file\PYZus{}databbase}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                        
+                \PY{n}{reader}\PY{o}{=}\PY{n}{csv}\PY{o}{.}\PY{n}{reader}\PY{p}{(}\PY{n}{outfile}\PY{p}{)}
+                \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                    \PY{n}{queue\PYZus{}paragraph}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}print (row)}
+            \PY{k}{finally}\PY{p}{:}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{outfile}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{queue\PYZus{}paragraph}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{read\PYZus{}cvs\PYZus{}by\PYZus{}pands}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{p}{,}\PY{n}{file\PYZus{}databbase}\PY{p}{,}\PY{n}{index\PYZus{}col}\PY{p}{,} \PY{n}{header}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{o}{+}\PY{n}{file\PYZus{}databbase}\PY{p}{,}\PY{n}{index\PYZus{}col}\PY{o}{=}\PY{n}{index\PYZus{}col}\PY{p}{,}\PY{n}{header}\PY{o}{=}\PY{n}{header}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{pragraph\PYZus{}to\PYZus{}setnences}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{sent\PYZus{}tokenize}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{stopwords\PYZus{}list}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{stopwordsFile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./input/stopwords/stopwords.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{stopwordsFile}\PY{o}{.}\PY{n}{seek}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{stopwordsV1} \PY{o}{=} \PY{n}{stopwordsFile}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+            \PY{n}{stopwordsV2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{stopwordsV1}\PY{p}{:}
+                \PY{n}{sent}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{new\PYZus{}word} \PY{o}{=} \PY{n}{sent}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sent}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}
+                \PY{n}{stopwordsV2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{stopwordsV2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{new\PYZus{}stop\PYZus{}words} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{that}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{as}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{there}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{has}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{and}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{or}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{not}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{of}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{but}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{by}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{are}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{it}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{if}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{what}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{where}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{how}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{when}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{new\PYZus{}stop\PYZus{}words2}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{me}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{my}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{myself}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{we}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{our}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ours}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ourselves}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{you}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{your}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yours}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yourself}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yourselves}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{he}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{him}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{his}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{himself}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{she}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{her}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{herself}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{it}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{its}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{itself}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{they}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{them}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{their}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theirs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{themselves}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{what}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{which}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{who}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{this}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{that}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{these}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{those}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{am}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{are}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{was}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{were}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{be}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{been}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{being}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{have}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{has}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{had}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{having}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{do}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{does}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{did}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{doing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{an}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{and}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{but}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{if}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{or}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{because}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{as}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{until}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{while}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{of}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{at}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{by}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{for}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{with}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{about}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{against}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{between}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{into}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{through}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{during}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{before}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{after}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{above}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{below}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{up}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{down}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{over}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{under}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{again}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{further}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{then}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{once}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{here}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{there}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{when}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{where}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{why}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{how}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{each}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{few}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{more}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{most}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{some}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{such}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{not}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{only}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{own}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{so}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{than}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{too}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{very}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{can}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{will}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{just}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{don}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{should}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{now}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{even}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{until}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{then}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{must}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{numbers}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{]}
+        \PY{n}{stopwordsV2}\PY{o}{=}\PY{n}{stopwords\PYZus{}list}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}stemmer = SnowballStemmer(\PYZdq{}english\PYZdq{}, ignore\PYZus{}stopwords=True)}
+        \PY{k}{def} \PY{n+nf}{remove\PYZus{}stopword\PYZus{}sentences}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{p}{:}
+           
+                    
+            \PY{n}{list\PYZus{}word}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            \PY{n}{tokenizer} \PY{o}{=} \PY{n}{RegexpTokenizer}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{]+}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            
+            \PY{n}{words}\PY{o}{=}\PY{n}{tokenizer}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+            \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{words}\PY{p}{:}
+                \PY{n}{new\PYZus{}word} \PY{o}{=} \PY{n}{word}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ascii}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{new\PYZus{}word} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+            
+                    \PY{n}{english\PYZus{}stops} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{english}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                   
+                    \PY{n}{list\PYZus{}word}\PY{o}{=}\PY{p}{[}\PY{n}{new\PYZus{}word} \PY{k}{for} \PY{n}{new\PYZus{}word} \PY{o+ow}{in} \PY{n}{words} \PY{k}{if} \PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{english\PYZus{}stops}
+                               \PY{o+ow}{and} \PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{new\PYZus{}stop\PYZus{}words} 
+                               \PY{o+ow}{and} \PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{new\PYZus{}stop\PYZus{}words2} 
+                               \PY{o+ow}{and}  \PY{o+ow}{not} \PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{isdigit}\PY{p}{(}\PY{p}{)} 
+                               \PY{o+ow}{and} \PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{digits} 
+                               \PY{o+ow}{and} \PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in}  \PY{n}{numbers} \PY{o+ow}{and} \PY{n}{word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{stopwordsV2}
+                               \PY{o+ow}{and} \PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{string}\PY{o}{.}\PY{n}{punctuation}\PY{p}{]}
+            
+          
+            
+            \PY{k}{return} \PY{n}{list\PYZus{}word}\PY{c+c1}{\PYZsh{}(stem(setem\PYZus{}word for setem\PYZus{}word in  ([word for word in words if word not in english\PYZus{}stops and word not in new\PYZus{}stop\PYZus{}words])))}
+\end{Verbatim}
+
+
+    \section{Courps to CSV docs}\label{courps-to-csv-docs}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k}{def} \PY{n+nf}{courps\PYZus{}to\PYZus{}CSV\PYZus{}docs}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Reading the news articles file}
+            \PY{n}{nyTimesFile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./input/new\PYZhy{}york\PYZhy{}times\PYZhy{}articles/nytimes\PYZus{}news\PYZus{}articles.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latin\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{nyTimesFile}\PY{o}{.}\PY{n}{seek}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{nyTimesV1} \PY{o}{=} \PY{n}{nyTimesFile}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+            \PY{n}{nyTimesTemp} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{nyTimesURL} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{nyTimesV1}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{re}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{URL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nyTimesV1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{p}{[}\PY{p}{]}\PY{p}{:}
+                    \PY{n}{sent} \PY{o}{=} \PY{n}{sent} \PY{o}{+} \PY{n}{nyTimesV1}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{re}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{URL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nyTimesV1}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{!=} \PY{p}{[}\PY{p}{]}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{nyTimesV1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{nyTimesTemp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sent}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{sent} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+                    \PY{n}{nyTimesURL}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{nyTimesV1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{nyTimesTemp}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{nyTimesTemp}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{nyTimesTemp}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{articleID}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{nyTimesTemp}\PY{p}{)}\PY{p}{)}
+            \PY{n}{header\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{save\PYZus{}file\PYZus{}to\PYZus{}database}\PY{p}{(}\PY{n}{nyTimesTemp}\PY{p}{,}\PY{n}{path\PYZus{}database}\PY{p}{,}\PY{n}{pragraph\PYZus{}index}\PY{p}{,}\PY{n}{header\PYZus{}list}\PY{p}{)}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}for i in range(1):}
+        \PY{l+s+sd}{        print(i,\PYZdq{}============================================\PYZdq{})}
+        \PY{l+s+sd}{        print(\PYZdq{}============================================\PYZdq{})\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{c+c1}{\PYZsh{}nytimes = preProcessor(nyTimesTemp)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{============================================}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}print(nytimes)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{paragraphs}\PY{o}{=}\PY{n}{read\PYZus{}cvs\PYZus{}by\PYZus{}pands}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{p}{,}\PY{n}{pragraph\PYZus{}index}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{paragraphs}
+\end{Verbatim}
+
+
+    \section{Doc to sentence}\label{doc-to-sentence}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{paragraphs\PYZus{}to\PYZus{}sentece}\PY{p}{(}\PY{n}{pragraphs}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sentenses\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{index\PYZus{}p} \PY{o+ow}{in}  \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pragraphs}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}print(index\PYZus{}p)}
+                \PY{c+c1}{\PYZsh{}print(\PYZdq{}pppppppppppppppppppp\PYZdq{})}
+                \PY{c+c1}{\PYZsh{}print(pragraphs[index\PYZus{}p])}
+                
+                \PY{n}{setnences}\PY{o}{=}\PY{n}{pragraph\PYZus{}to\PYZus{}setnences}\PY{p}{(}\PY{n}{pragraphs}\PY{p}{[}\PY{n}{index\PYZus{}p}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sssssssssssssssssssssssssss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(setnences)}
+        
+                \PY{k}{for} \PY{n}{indexs} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{setnences}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{row}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                    \PY{c+c1}{\PYZsh{}print(setnences)}
+                    \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index\PYZus{}p}\PY{p}{)}
+                    \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{indexs}\PY{p}{)}
+                    \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{setnences}\PY{p}{[}\PY{n}{indexs}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{sentenses\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+            \PY{n}{header\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index\PYZus{}P}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index\PYZus{}sent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sentence}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sentenses\PYZus{}list}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{header\PYZus{}list}\PY{p}{)}\PY{c+c1}{\PYZsh{}, index=index)}
+            \PY{c+c1}{\PYZsh{}df}
+        
+            \PY{c+c1}{\PYZsh{}print(sentenses\PYZus{}list)}
+            \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{o}{+}\PY{n}{Sentences}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}save\PYZus{}file\PYZus{}to\PYZus{}database(sentenses\PYZus{}list,path\PYZus{}database,\PYZdq{}Sentences.csv\PYZdq{},header\PYZus{}list)        }
+            \PY{k}{return} \PY{n}{df}
+        
+        \PY{c+c1}{\PYZsh{}paragraphs\PYZus{}to\PYZus{}sentece(paragraphs.text)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def}  \PY{n+nf}{paragraphs\PYZus{}to\PYZus{}sentece\PYZus{}Not\PYZus{}stop\PYZus{}word}\PY{p}{(}\PY{n}{pragraphs}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}words\PYZus{}list=[]}
+            \PY{n}{sentenses\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{index\PYZus{}p} \PY{o+ow}{in}  \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pragraphs}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{setnences}\PY{o}{=}\PY{n}{pragraph\PYZus{}to\PYZus{}setnences}\PY{p}{(}\PY{n}{pragraphs}\PY{p}{[}\PY{n}{index\PYZus{}p}\PY{p}{]}\PY{p}{)}
+                
+                \PY{k}{for} \PY{n}{indexs} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{setnences}\PY{p}{)}\PY{p}{)}\PY{p}{:}    
+                    \PY{c+c1}{\PYZsh{}print(\PYZdq{}Sentence No. \PYZdq{},indexs,\PYZdq{}: \PYZdq{},setnences[indexs],\PYZdq{}\PYZbs{}n\PYZdq{})}
+                    \PY{n}{words}\PY{o}{=}\PY{n}{remove\PYZus{}stopword\PYZus{}sentences}\PY{p}{(}\PY{n}{setnences}\PY{p}{[}\PY{n}{indexs}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{wordsent}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+                    \PY{n}{row}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                    
+                    \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index\PYZus{}p}\PY{p}{)}
+                    \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{indexs}\PY{p}{)}
+                    \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{words}\PY{p}{)}
+                    \PY{n}{sentenses\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+            \PY{n}{header\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index\PYZus{}P}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index\PYZus{}sent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{words\PYZus{}not\PYZus{}stop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sentenses\PYZus{}list}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{header\PYZus{}list}\PY{p}{)}\PY{c+c1}{\PYZsh{}, index=index)}
+            \PY{c+c1}{\PYZsh{}df}
+        
+            \PY{c+c1}{\PYZsh{}print(sentenses\PYZus{}list)}
+            \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{o}{+}\PY{n}{Sentences\PYZus{}not\PYZus{}stops}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}save\PYZus{}file\PYZus{}to\PYZus{}database(sentenses\PYZus{}list,path\PYZus{}database,\PYZdq{}Sentences.csv\PYZdq{},header\PYZus{}list)        }
+            \PY{k}{return} \PY{n}{df}
+        
+        \PY{c+c1}{\PYZsh{}paragraphs\PYZus{}to\PYZus{}sentece\PYZus{}Not\PYZus{}stop\PYZus{}word(paragraphs.text)}
+\end{Verbatim}
+
+
+    \section{Sentence To LESK}\label{sentence-to-lesk}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{this function for compute lesk of word in sentence}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{k}{def} \PY{n+nf}{lesk\PYZus{}word\PYZus{}sentence}\PY{p}{(}\PY{n}{sentence}\PY{p}{,}\PY{n}{word}\PY{p}{)}\PY{p}{:}
+            \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{wsd} \PY{k}{import} \PY{n}{lesk}
+            \PY{n}{lesk\PYZus{}synset}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+            \PY{c+c1}{\PYZsh{}lesks= []}
+            \PY{c+c1}{\PYZsh{}for word in words:}
+            \PY{c+c1}{\PYZsh{}disambiguated=lesk(context\PYZus{}sentence=sentence, ambiguous\PYZus{}word=word)}
+            \PY{n}{disambiguated}\PY{o}{=}\PY{n}{lesk}\PY{p}{(}\PY{n}{sentence}\PY{p}{,}\PY{n}{word}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}print(disambiguated)}
+            \PY{c+c1}{\PYZsh{}if disambiguated is not None:}
+            \PY{n}{lesk\PYZus{}synset}\PY{o}{=}\PY{n}{disambiguated}
+            \PY{c+c1}{\PYZsh{}else:}
+            \PY{c+c1}{\PYZsh{}lesk\PYZus{}synset=0}
+            \PY{c+c1}{\PYZsh{}print(\PYZdq{}Word is: \PYZdq{},word,\PYZdq{}\PYZbs{}n LESK: \PYZdq{},lesk(sentence,word, \PYZsq{}n\PYZsq{}),\PYZdq{}\PYZbs{}n Sentence: \PYZdq{},sentence )}
+                
+            \PY{k}{return} \PY{n}{lesk\PYZus{}synset}
+        
+        \PY{c+c1}{\PYZsh{}lesk(\PYZdq{}Computer science is a discipline that spans theory and practice\PYZdq{},\PYZdq{}science\PYZdq{})}
+        
+        \PY{c+c1}{\PYZsh{}sent = \PYZsq{}people should be able to marry a person of their choice\PYZsq{}.split()}
+        \PY{c+c1}{\PYZsh{}lesk(sent, \PYZsq{}able\PYZsq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{lesk\PYZus{}word\PYZus{}sentence}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I love you}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{love}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{sent\PYZus{}lesks}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{df\PYZus{}Sentences}\PY{o}{=}\PY{n}{read\PYZus{}cvs\PYZus{}by\PYZus{}pands}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{p}{,}\PY{n}{Sentences}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{df\PYZus{}Sentences\PYZus{}not\PYZus{}stops}\PY{o}{=}\PY{n}{read\PYZus{}cvs\PYZus{}by\PYZus{}pands}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{p}{,}\PY{n}{Sentences\PYZus{}not\PYZus{}stops}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{sentences}\PY{o}{=}\PY{n}{df\PYZus{}Sentences}\PY{o}{.}\PY{n}{sentence}
+            \PY{n}{words\PYZus{}not\PYZus{}stop}\PY{o}{=}\PY{n}{df\PYZus{}Sentences\PYZus{}not\PYZus{}stops}\PY{o}{.}\PY{n}{words\PYZus{}not\PYZus{}stop}\PY{c+c1}{\PYZsh{}[0]\PYZsh{}[\PYZsq{}words\PYZus{}not\PYZus{}stop\PYZsq{}][0]}
+            \PY{n}{lesk\PYZus{}df\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            \PY{n}{file}\PY{o}{=}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./NYT\PYZus{}output/file.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}Sentences}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{317989}\PY{p}{)}\PY{p}{:}\PY{c+c1}{\PYZsh{}len(df\PYZus{}Sentences)):}
+                \PY{n}{lesks}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{n}{lesks\PYZus{}name}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{n}{row}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{k}{if} \PY{n}{words\PYZus{}not\PYZus{}stop}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+        
+                    \PY{n}{words\PYZus{}not\PYZus{}stop}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{words\PYZus{}not\PYZus{}stop}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n}{sentences}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{sentences}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}       
+                    \PY{n}{words\PYZus{}not\PYZus{}stop\PYZus{}list}\PY{o}{=}\PY{n}{words\PYZus{}not\PYZus{}stop}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}print(words\PYZus{}not\PYZus{}stop\PYZus{}list)}
+                    \PY{c+c1}{\PYZsh{}print(sentences[i])}
+                    \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{words\PYZus{}not\PYZus{}stop\PYZus{}list}\PY{p}{:}
+                        \PY{c+c1}{\PYZsh{}print(word)}
+                        \PY{n}{l}\PY{o}{=}\PY{n}{lesk\PYZus{}word\PYZus{}sentence}\PY{p}{(}\PY{n}{sentences}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{word}\PY{p}{)}
+                        \PY{c+c1}{\PYZsh{}print(\PYZdq{}l\PYZdq{},l)}
+                        \PY{k}{if} \PY{n}{l} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                            \PY{n}{lesks}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+                            \PY{n}{lesks\PYZus{}name}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{l}\PY{o}{.}\PY{n}{name}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(\PYZdq{}888888888888888888888888888888888888888888\PYZdq{})}
+                \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{df\PYZus{}Sentences\PYZus{}not\PYZus{}stops}\PY{o}{.}\PY{n}{index\PYZus{}P}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{df\PYZus{}Sentences\PYZus{}not\PYZus{}stops}\PY{o}{.}\PY{n}{index\PYZus{}sent}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{lesks}\PY{p}{)}
+                \PY{n}{row}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{lesks\PYZus{}name}\PY{p}{)}
+                \PY{n}{lesk\PYZus{}df\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}print(lesk\PYZus{}df\PYZus{}list)}
+            \PY{n}{header\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index\PYZus{}P}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index\PYZus{}sent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lesks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lesks\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{lesk\PYZus{}df\PYZus{}list}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{header\PYZus{}list}\PY{p}{)}
+            
+            \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}database}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lesks.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}  
+            \PY{c+c1}{\PYZsh{}return df}
+        
+        
+        
+        
+        \PY{n}{sent\PYZus{}lesks}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}https://www.kaggle.com/nzalake52/text\PYZhy{}search\PYZhy{}text\PYZhy{}mining/notebook}
+        \PY{c+c1}{\PYZsh{}We will be implementing a simple search engine using nltk in python}
+        \PY{c+c1}{\PYZsh{}With the help of TF\PYZhy{}IDF ranking and cosine similarity we can rank the documents and get the desired output.}
+        \PY{c+c1}{\PYZsh{}Following is the code for the same, many machine learning algorithms can be applied and the use of this search engine }
+        \PY{c+c1}{\PYZsh{}can be extended.}
+        \PY{c+c1}{\PYZsh{}This is the simplest search engine implementation}
+        
+        
+        
+        
+        \PY{c+c1}{\PYZsh{}Creating the function for preprocessing the text file, the functions does the following:}
+        \PY{c+c1}{\PYZsh{}Removing the URLs in the file}
+        \PY{c+c1}{\PYZsh{}Removing blank lines}
+        \PY{c+c1}{\PYZsh{}Converting the letters that were not read properly due to encoding, to be viewed properly}
+        \PY{c+c1}{\PYZsh{}Removing stopwords from the text}
+        \PY{c+c1}{\PYZsh{}Removing the punctuations form the text}
+        
+        \PY{k}{def} \PY{n+nf}{preProcessor}\PY{p}{(}\PY{n}{textFile}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Starting pre\PYZhy{}processing of the corpus..}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Start: Word Tokenizing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{textFilev1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{textFilev1} \PY{o}{=} \PY{p}{[}\PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{)} \PY{k}{for} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{textFile}\PY{p}{]}
+            
+            
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stop: Word Tokenizing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Start: ASCII encoding for special characters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{textFilev2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{textFilev1}\PY{p}{:}
+                \PY{n}{new\PYZus{}sent} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{sent}\PY{p}{:}
+                    \PY{n}{new\PYZus{}word} \PY{o}{=} \PY{n}{word}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ascii}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{new\PYZus{}word} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{new\PYZus{}sent}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}word}\PY{p}{)}
+                \PY{n}{textFilev2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}sent}\PY{p}{)}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stop: ASCII encoding for special characters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Start: Stopwords Removal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{stopwordsFile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./input/stopwords/stopwords.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{stopwordsFile}\PY{o}{.}\PY{n}{seek}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{stopwordsV1} \PY{o}{=} \PY{n}{stopwordsFile}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+            \PY{n}{stopwordsV2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{stopwordsV1}\PY{p}{:}
+                \PY{n}{sent}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{new\PYZus{}word} \PY{o}{=} \PY{n}{sent}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sent}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}
+                \PY{n}{stopwordsV2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{textFilev1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{textFilev2}\PY{p}{:}
+                \PY{n}{new\PYZus{}sent} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{sent}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{stopwordsV2}\PY{p}{:}
+                        \PY{n}{new\PYZus{}sent}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{textFilev1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}sent}\PY{p}{)}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stop: Stopwords Removal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Start: Punctuation Removal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{textFilev2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{textFilev1}\PY{p}{:}
+                \PY{n}{new\PYZus{}sent} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{sent}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{word} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{string}\PY{o}{.}\PY{n}{punctuation}\PY{p}{:}
+                        \PY{n}{new\PYZus{}sent}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                \PY{n}{textFilev2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}sent}\PY{p}{)}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stop: Punctuation Removal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Start: Phrase Detection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{textFilev1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{common\PYZus{}terms} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{of}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{with}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{without}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{and}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{or}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{so}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{and}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{n}{phraseTrainer} \PY{o}{=} \PY{n}{Phrases}\PY{p}{(}\PY{n}{textFilev2}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+sa}{b}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{common\PYZus{}terms}\PY{o}{=}\PY{n}{common\PYZus{}terms}\PY{p}{)}
+            \PY{n}{phraser} \PY{o}{=} \PY{n}{Phraser}\PY{p}{(}\PY{n}{phraseTrainer}\PY{p}{)}
+            \PY{k}{for} \PY{n}{article} \PY{o+ow}{in} \PY{n}{textFilev2}\PY{p}{:}
+                \PY{n}{textFilev1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{phraser}\PY{p}{[}\PY{n}{article}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stop: Phrase Detection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{textFilev1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Function for creating intermediate index}
+        \PY{k}{def} \PY{n+nf}{file\PYZus{}indexing}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{:}
+            \PY{n}{fileIndex} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+            \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{word} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{fileIndex}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{fileIndex}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{fileIndex}\PY{p}{[}\PY{n}{word}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{index}\PY{p}{]}
+            \PY{k}{return} \PY{n}{fileIndex}
+        
+        \PY{c+c1}{\PYZsh{}building final index}
+        \PY{k}{def} \PY{n+nf}{fullIndex}\PY{p}{(}\PY{n}{intIndex}\PY{p}{)}\PY{p}{:}
+            \PY{n}{totalindex} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+            \PY{k}{for} \PY{n}{fileName} \PY{o+ow}{in} \PY{n}{intIndex}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{intIndex}\PY{p}{[}\PY{n}{fileName}\PY{p}{]}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{totalindex}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{fileName} \PY{o+ow}{in} \PY{n}{totalindex}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{totalindex}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{p}{[}\PY{n}{fileName}\PY{p}{]}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{intIndex}\PY{p}{[}\PY{n}{fileName}\PY{p}{]}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                        \PY{k}{else}\PY{p}{:}
+                            \PY{n}{totalindex}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{p}{[}\PY{n}{fileName}\PY{p}{]} \PY{o}{=} \PY{n}{intIndex}\PY{p}{[}\PY{n}{fileName}\PY{p}{]}\PY{p}{[}\PY{n}{word}\PY{p}{]}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{totalindex}\PY{p}{[}\PY{n}{word}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{fileName} \PY{p}{:} \PY{n}{intIndex}\PY{p}{[}\PY{n}{fileName}\PY{p}{]}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{p}{\PYZcb{}}
+            \PY{k}{return} \PY{n}{totalindex}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{nyTimesIndex} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        \PY{k}{for} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{nytimes}\PY{p}{:}
+            \PY{n}{nyTimesIndex}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{sent}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{file\PYZus{}indexing}\PY{p}{(}\PY{n}{sent}\PY{p}{)}
+        
+        \PY{n}{nyTimesIndexV1} \PY{o}{=} \PY{n}{fullIndex}\PY{p}{(}\PY{n}{nyTimesIndex}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Functions to create one word or phrase query search}
+        \PY{k}{def} \PY{n+nf}{wordSearch}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{nyTimesIndexV1}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{p}{[}\PY{n}{file} \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n}{nyTimesIndexV1}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        
+        
+        \PY{k}{def} \PY{n+nf}{phraseQuery}\PY{p}{(}\PY{n}{string}\PY{p}{)}\PY{p}{:}
+            \PY{n}{lists}\PY{p}{,} \PY{n}{result} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{string}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{n}{lists}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{wordSearch}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+            \PY{n}{setList} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{lists}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{intersection}\PY{p}{(}\PY{o}{*}\PY{n}{lists}\PY{p}{)}
+            \PY{k}{for} \PY{n}{fileName} \PY{o+ow}{in} \PY{n}{setList}\PY{p}{:}
+                \PY{n}{result}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fileName}\PY{p}{)}
+            \PY{k}{return} \PY{n}{result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{searchResult} \PY{o}{=} \PY{n}{phraseQuery}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white  house}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{searchResult1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n}{wordSearch}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{searchResult1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{file}\PY{p}{)}
+        \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n}{wordSearch}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{house}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{file} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{searchResult1}\PY{p}{:}
+                \PY{n}{searchResult1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{file}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Making use of TF\PYZhy{}IDF ranking to rank the documents given by the searches}
+        \PY{c+c1}{\PYZsh{}Also using similarity metrics (Cosine similarity) to get the similarity scores between both the documents }
+        \PY{c+c1}{\PYZsh{}from both search results}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics}\PY{n+nn}{.}\PY{n+nn}{pairwise} \PY{k}{import} \PY{n}{cosine\PYZus{}similarity}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{TfidfVectorizer}
+        
+        \PY{n}{tfidf} \PY{o}{=} \PY{n}{TfidfVectorizer}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{searchResult1}\PY{p}{)}
+        \PY{n}{searchResult1TFIDF} \PY{o}{=} \PY{n}{tfidf}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{searchResult1}\PY{p}{)}
+        \PY{n}{searchResultTFIDF} \PY{o}{=} \PY{n}{tfidf}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{searchResult}\PY{p}{)}
+        \PY{n}{sims} \PY{o}{=} \PY{n}{cosine\PYZus{}similarity}\PY{p}{(}\PY{n}{searchResult1TFIDF}\PY{p}{,} \PY{n}{searchResultTFIDF}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Now putting the cosine similarity results into a data frame}
+        \PY{c+c1}{\PYZsh{}Sorting the dataframe by score and getting the most similar and appropriate 30 documents from the search results}
+        \PY{n}{cosineSum} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{ind} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sims}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{cosineSum}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{sims}\PY{p}{[}\PY{n}{ind}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{sumDF} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{cosineSum}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{sumDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cosineSum}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+        \PY{n}{sumDF}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{ind} \PY{o+ow}{in} \PY{n}{sumDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{nyTimesURL}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{searchResult1}\PY{p}{[}\PY{n}{ind}\PY{p}{]}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{searchResult1}\PY{p}{[}\PY{n}{ind}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{articleid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{9}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

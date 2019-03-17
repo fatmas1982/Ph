@@ -1,0 +1,11 @@
+,microphone.n.01,small_computer_system_interface.n.01,circuit_breaker.n.01,adapter.n.02,cam.n.02
+0,microphone.n.01,small_computer_system_interface.n.01,circuit_breaker.n.01,adapter.n.02,cam.n.02
+1,small_computer_system_interface.n.01,microphone.n.01,small_computer_system_interface.n.01,small_computer_system_interface.n.01,winder.n.02
+2,circuit_breaker.n.01,circuit_breaker.n.01,microphone.n.01,microphone.n.01,small_computer_system_interface.n.01
+3,adapter.n.02,adapter.n.02,adapter.n.02,cam.n.02,microphone.n.01
+4,cam.n.02,cam.n.02,cam.n.02,converter.n.01,adapter.n.02
+5,converter.n.01,converter.n.01,converter.n.01,cursor.n.01,converter.n.01
+6,cursor.n.01,cursor.n.01,cursor.n.01,winder.n.02,cursor.n.01
+7,winder.n.02,winder.n.02,winder.n.02,keyboard.n.01,keyboard.n.01
+8,keyboard.n.01,keyboard.n.01,keyboard.n.01,circuit_breaker.n.01,circuit_breaker.n.01
+9,pawl.n.01,pawl.n.01,pawl.n.01,pawl.n.01,pawl.n.01

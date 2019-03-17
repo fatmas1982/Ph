@@ -1,0 +1,26 @@
+
+======For My project and SNNMF============
+to generate PMI per modeland dataset
+1-get Lesk dataset per curpus and remove [,',", and , 
+2-rename the file to txt
+3-copy these files to wikipath in /media/fsg/74C86089C8604C04/download/topic_interpretability-master/ref_corpus/wiki/
+4-Generate max top 5 term per each 100 topic in curpos
+	1)call this function for  each model and curpos r.top5_terms_per_Alltopic(u.path_database,u.Reuter_H4,u.path_evaluation) fro Report file 
+	2)remove manually firest row and firest column (index and header) from generated csv file 
+	3)clean file to remove comma bycalling u.clean_CSV_fortopic_Evaluation(u.path_evaluation+'ReuterAll_top5_terms_topics.csv',u.path_evaluation+'ReuterAll_top5_terms_topics.txt')
+	4)goto topic_interpretability-master project and generate PMI per each topic file generated from 4-3 step
+
+
+============for TKML======project===========
+
+to run model :
+
+
+to convert model to introbabilty format
+delete firest column(index and firest row header for sourse file from output folder of tkml
+call this functionfrom Utils evaluation tkml_topic_to_intropapilty_format(sourcefile,destnation)
+#u.tkml_topic_to_intropapilty_format('/media/fsg/74C86089C8604C04/download/tkm-master/output/Topics_Brown.csv','/media/fsg/74C86089C8604C04/download/tkm-master/output/Topics_Brown.txt')
+
+
+======Jacard=====
+call Jaccard_All(tkm,SNNMF,JC_files) from Utils
